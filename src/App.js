@@ -35,7 +35,7 @@ class App extends Component {
   }
 
   printState = () => {
-    console.log(this.state)
+    // console.log(this.state)
   }
 
   moveCard = (dragIndex, hoverIndex) => {
