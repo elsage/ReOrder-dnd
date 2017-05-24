@@ -63,6 +63,7 @@ function collectTarget(connect, monitor) {
 }
 
 class ListItem extends Component {
+
     render() {
         const { text, isDragging, connectDragSource, connectDropTarget } = this.props
         const opacity = isDragging ? 0.5 : 1
