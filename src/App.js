@@ -5,7 +5,7 @@ import HTML5Backend from 'react-dnd-html5-backend';
 import ListItem from './ListItem';
 
 const style = {
-  width: 400
+  // width: 400
 }
 
 class App extends Component {
@@ -14,10 +14,22 @@ class App extends Component {
     this.state = {
       cards: [{
         id: 0,
-        text: 'Write a cool JS library'
+        text: 'Test Anti-Gravity Thrusters'
       }, {
         id: 1,
-        text: 'Make it generic enough'
+        text: 'Check Helmet for Cracks'
+      }, {
+        id: 2,
+        text: 'Inspect Weather Patterns'
+      }, {
+        id: 3,
+        text: 'Scan Horizon for Geese'
+      }, { 
+        id: 4,
+        text: 'REMEMBER TO NOT PRESS THE RED BUTTON'
+      }, {
+        id: 5,
+        text: 'Press the red button'
       }]
     }
   }

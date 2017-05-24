@@ -5,13 +5,6 @@ import { DragSource, DropTarget } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import flow from 'lodash/flow';
 
-const style = { 
-    border: '1px dashed gray',
-    padding: '0.5rem 1rem', 
-    marginBotom: '0.5rem',
-    cursor: 'move',
-}
-
 const cardSource = {
     beginDrag(props) {
         return {
@@ -20,7 +13,7 @@ const cardSource = {
         }
     },
     endDrag(props) {
-        props.printState()
+        console.log(props)
         return {
             id: props.id,
             index: props.index
@@ -73,10 +66,10 @@ class ListItem extends Component {
     render() {
         const { text, isDragging, connectDragSource, connectDropTarget } = this.props
         const opacity = isDragging ? 0.5 : 1
-        const backgroundColor = isDragging ? 'green' : 'white'
+        const backgroundColor = isDragging ? 'yellow' : 'white'
 
         return connectDragSource(connectDropTarget(
-            <div style={{...style, opacity, backgroundColor }}>
+            <div className="lsDiv" style={{ opacity, backgroundColor }}>
                 {text}
             </div>
         ))
@@ -94,6 +87,6 @@ ListItem.propTypes = {
 }
 
 export default flow(
-    DragSource(ItemTypes.LISTITEM, cardSource, collectTarget), //collectTarget: collecting the target for the drag source;
+    DragSource(ItemTypes.LISTITEM, cardSource, collectTarget),
     DropTarget(ItemTypes.LISTITEM, cardTarget, collectSource)
 )(ListItem)
