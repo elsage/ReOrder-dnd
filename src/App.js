@@ -3,6 +3,7 @@ import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ListItem from './ListItem';
+import $ from 'jquery';
 
 const style = {
   // width: 400
@@ -32,6 +33,21 @@ class App extends Component {
         text: 'Press the red button'
       }]
     }
+  }
+
+  onComponentMount() {
+    /* Will use once have endpoint */ 
+    // $.ajax({
+    //   url: 'www.test.com',
+    //   data: data,
+    //   success: (data) => {
+    //     console.log(JSON.stringify(data))
+    //     this.setState({
+    //       listArray: data
+    //     })
+    //   },
+    //   dataType: 'json'
+    // })
   }
 
   printState = () => {
