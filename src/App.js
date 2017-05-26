@@ -13,30 +13,38 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [{}],
-      isEmpty: true
+      cards: [{}], 
+      isEmpty: true,
+      dataset: 'Instruction Set'
     }
   }
 
-  componentDidMount() {
+  retrieveDataset = (datasetName) => {
     $.ajax({
-      url: '../data.json',
+      url: `../${datasetName}.json`,
       success: (data) => {
-        console.log('Data retrieved successfully.')
-        console.log('First entry: ' + JSON.stringify(data[0]))
         this.setState({
           cards: data,
           isEmpty: false
         })
+        console.log('Data retrieved successfully.')
+        console.log('First entry: ' + JSON.stringify(data[0]))
+      },
+      error: (e) => {
+        alert(`${datasetName} not found. Please try again.`)
       },
       dataType: 'json'
     })
+  }
+  
+  componentDidMount = () => {
+    // this.retrieveDataset('data')
   }
 
   moveCard = (dragIndex, hoverIndex) => {
     const { cards } = this.state
     const dragCard = cards[dragIndex]
-    
+
     this.setState(update(this.state, {
       cards: {
         $splice: [
@@ -47,21 +55,35 @@ class App extends Component {
     }))
   }
 
+  updateInput = (event) => {
+    this.setState({
+      dataset: event.target.value
+    })
+  }
+
   render() {
     const { cards } = this.state
 
     return (
-      <div style={style}>
-        {cards.map((card, i) => (
-          <ListItem key={card.id} 
-                    index={i} 
-                    id={card.id} 
-                    text={card.instruction} 
-                    moveCard={this.moveCard}/> 
-        ))}
-      </div>
+      this.state.isEmpty ? (
+        <div className='lsDiv'>
+           Enter Dataset Name <form onSubmit={() => { this.retrieveDataset(this.state.dataset) }}>
+            <input value={this.state.dataset} onChange={this.updateInput}/>
+          </form>
+        </div>
+      ) : (
+          <div style={style}>
+            {cards.map((card, i) => (
+              <ListItem key={card.id}
+                index={i}
+                id={card.id}
+                text={card.instruction}
+                moveCard={this.moveCard} />
+            ))}
+          </div>
+        )
     )
   }
-} 
+}
 
 export default DragDropContext(HTML5Backend)(App)
