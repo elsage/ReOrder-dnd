@@ -13,7 +13,6 @@ const cardSource = {
         }
     },
     endDrag(props) {
-        console.log(props)
         return {
             id: props.id,
             index: props.index
@@ -68,10 +67,9 @@ class ListItem extends Component {
         const { index, text, isDragging, connectDragSource, connectDropTarget } = this.props
         const opacity = isDragging ? 0.5 : 1
         const backgroundColor = isDragging ? 'yellow' : 'white'
-
         return connectDragSource(connectDropTarget(
             <div className="lsDiv" style={{ opacity, backgroundColor }}>
-                {index+1 + " " + text}
+                {(index+1) + " " + text}
             </div>
         ))
     }
@@ -83,7 +81,7 @@ ListItem.propTypes = {
     index: PropTypes.number.isRequired,
     isDragging: PropTypes.bool.isRequired,
     id: PropTypes.any.isRequired,
-    text: PropTypes.string.isRequired,
+    instruction: PropTypes.string.isRequired,
     moveCard: PropTypes.func.isRequired
 }
 

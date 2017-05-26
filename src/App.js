@@ -3,6 +3,7 @@ import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ListItem from './ListItem';
+import $ from 'jquery';
 
 const style = {
   // width: 400
@@ -12,30 +13,24 @@ class App extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      cards: [{
-        id: 0,
-        text: 'Test Anti-Gravity Thrusters'
-      }, {
-        id: 1,
-        text: 'Check Helmet for Cracks'
-      }, {
-        id: 2,
-        text: 'Inspect Weather Patterns'
-      }, {
-        id: 3,
-        text: 'Scan Horizon for Geese'
-      }, { 
-        id: 4,
-        text: 'REMEMBER TO NOT PRESS THE RED BUTTON'
-      }, {
-        id: 5,
-        text: 'Press the red button'
-      }]
+      cards: [{}],
+      isEmpty: true
     }
   }
 
-  printState = () => {
-    // console.log(this.state)
+  componentDidMount() {
+    $.ajax({
+      url: '../data.json',
+      success: (data) => {
+        console.log('Data retrieved successfully.')
+        console.log('First entry: ' + JSON.stringify(data[0]))
+        this.setState({
+          cards: data,
+          isEmpty: false
+        })
+      },
+      dataType: 'json'
+    })
   }
 
   moveCard = (dragIndex, hoverIndex) => {
@@ -61,9 +56,8 @@ class App extends Component {
           <ListItem key={card.id} 
                     index={i} 
                     id={card.id} 
-                    text={card.text} 
-                    moveCard={this.moveCard}
-                    printState={this.printState}/>
+                    text={card.instruction} 
+                    moveCard={this.moveCard}/> 
         ))}
       </div>
     )
