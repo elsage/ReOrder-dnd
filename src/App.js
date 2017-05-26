@@ -15,11 +15,12 @@ class App extends Component {
     this.state = {
       cards: [{}], 
       isEmpty: true,
-      dataset: 'Instruction Set'
+      dataset: ''
     }
   }
 
   retrieveDataset = (datasetName) => {
+    console.log(datasetName)
     $.ajax({
       url: `../${datasetName}.json`,
       success: (data) => {
@@ -63,12 +64,14 @@ class App extends Component {
 
   render() {
     const { cards } = this.state
-
+    let empty = this.state.isEmpty
+    console.log(empty)
     return (
-      this.state.isEmpty ? (
+      empty ? (
         <div className='lsDiv'>
-           Enter Dataset Name <form onSubmit={() => { this.retrieveDataset(this.state.dataset) }}>
-            <input value={this.state.dataset} onChange={this.updateInput}/>
+          <form onSubmit={() => this.retrieveDataset(this.state.dataset)}>
+            Enter Dataset Name <input value={this.state.dataset} 
+                                      onChange={this.updateInput}/> <button type='submit'> Submit </button>
           </form>
         </div>
       ) : (
