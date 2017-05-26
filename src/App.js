@@ -19,10 +19,9 @@ class App extends Component {
     }
   }
 
-  retrieveDataset = (datasetName) => {
-    console.log(datasetName)
+  retrieveDataset = () => {
     $.ajax({
-      url: `../${datasetName}.json`,
+      url: `../${this.state.dataset}.json`,
       success: (data) => {
         this.setState({
           cards: data,
@@ -32,7 +31,7 @@ class App extends Component {
         console.log('First entry: ' + JSON.stringify(data[0]))
       },
       error: (e) => {
-        alert(`${datasetName} not found. Please try again.`)
+        alert(`${this.state.dataset} not found. Please try again.`)
       },
       dataType: 'json'
     })
@@ -69,7 +68,7 @@ class App extends Component {
     return (
       empty ? (
         <div className='lsDiv'>
-          <form onSubmit={() => this.retrieveDataset(this.state.dataset)}>
+          <form onSubmit={this.retrieveDataset}>
             Enter Dataset Name <input value={this.state.dataset} 
                                       onChange={this.updateInput}/> <button type='submit'> Submit </button>
           </form>
