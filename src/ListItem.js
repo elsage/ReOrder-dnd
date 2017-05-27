@@ -4,6 +4,7 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import flow from 'lodash/flow';
+import Paper from 'material-ui/Paper';
 
 const cardSource = {
     beginDrag(props) {
@@ -67,8 +68,10 @@ class ListItem extends Component {
         const opacity = isDragging ? 0.5 : 1
         const backgroundColor = isDragging ? 'yellow' : 'white'
         return connectDragSource(connectDropTarget(
-            <div className="lsDiv" style={{ opacity, backgroundColor }}>
+            <div className='lsDiv' style={{ opacity, backgroundColor }}>
+            <Paper>
                 {(index+1) + " " + text}
+            </Paper>
             </div>
         ))
     }
