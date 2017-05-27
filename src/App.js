@@ -4,6 +4,7 @@ import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
 import ListItem from './ListItem';
 import $ from 'jquery';
+import ListSubmissionButton from './ListSubmissionButton';
 
 const style = {
   // width: 400
@@ -75,7 +76,7 @@ class App extends Component {
           </form>
         </div>
       ) : (
-          <div style={style}>
+          <div className="lsDiv" style={style}>
             {cards.map((card, i) => (
               <ListItem key={card.id}
                 index={i}
@@ -83,6 +84,7 @@ class App extends Component {
                 text={card.instruction}
                 moveCard={this.moveCard} />
             ))}
+            <ListSubmissionButton/>
           </div>
         )
     )
