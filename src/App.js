@@ -19,7 +19,8 @@ class App extends Component {
     }
   }
 
-  retrieveDataset = () => {
+  retrieveDataset = (event) => {
+    event.preventDefault() // This is to prevent re-loading of the page onSubmit()
     $.ajax({
       url: `../${this.state.dataset}.json`,
       success: (data) => {
@@ -69,8 +70,8 @@ class App extends Component {
       empty ? (
         <div className='lsDiv'>
           <form onSubmit={this.retrieveDataset}>
-            Enter Dataset Name <input value={this.state.dataset} 
-                                      onChange={this.updateInput}/> <button type='submit'> Submit </button>
+            Enter Dataset Name <input type='text' ref='datasetName' value={this.state.dataset} placeholder={'Search'} onChange={this.updateInput}/> 
+            <button type='submit'> Submit </button>
           </form>
         </div>
       ) : (
