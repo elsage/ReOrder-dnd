@@ -64,7 +64,9 @@ class App extends Component {
                   moveCard={this.moveCard} />
               </MultiThemeProvider>
             ))}
+            <MultiThemeProvider>
             <ListSubmissionButton />
+            </MultiThemeProvider>
           </div>
         )
     )

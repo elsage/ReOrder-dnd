@@ -4,17 +4,21 @@ body {
 
 div.lsDiv {
   margin: 10px;
-  padding: 10px;
+  padding: 12px;
   margin-left: auto;
   margin-right: auto;
   text-align: center;
   width: 50%;
   background: white;
-  font-size: 20px;
+  font-size: 18px;
   border-radius: 25px;
 }
 
 div.hasMoved {
   background-color: red;
   opacity: 0.50;
+}
+
+cntr {
+  text-align: center
 }

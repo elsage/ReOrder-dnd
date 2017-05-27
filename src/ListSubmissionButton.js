@@ -1,5 +1,6 @@
 import React, { Component } from 'react';
 import PropTypes from 'prop-types';
+import RaisedButton from 'material-ui/RaisedButton';
 // import $ from 'jquery';
 
 class ListSubmissionButton extends Component {
@@ -19,7 +20,7 @@ class ListSubmissionButton extends Component {
 
     render() {
         return (
-            <button onClick={this.submitList}>Submit Changes</button>
+            <RaisedButton secondary={true} onClick={this.submitList}>Submit Changes</RaisedButton>
         )
     }
 }
