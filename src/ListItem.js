@@ -5,8 +5,9 @@ import { DragSource, DropTarget } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import flow from 'lodash/flow';
 import Paper from 'material-ui/Paper';
+import muiThemeable from 'material-ui/styles/muiThemeable';
 
-const cardSource = {
+const cardSourceSpec = {
   beginDrag(props) {
     return {
       id: props.id,
@@ -21,7 +22,7 @@ const cardSource = {
   }
 }
 
-const cardTarget = {
+const cardTargetSpec = {
   hover(props, monitor, component) {
     const dragIndex = monitor.getItem().index
     const hoverIndex = props.index
@@ -49,13 +50,15 @@ const cardTarget = {
   }
 }
 
-function collectSource(connect) {
+// These collect functions determine what is injected into components.
+function collectTargetProps(connect, monitor) {
   return {
-    connectDropTarget: connect.dropTarget()
+    connectDropTarget: connect.dropTarget(),
+    highlight: monitor.canDrop()
   }
 }
 
-function collectTarget(connect, monitor) {
+function collectSourceProps(connect, monitor) {
   return {
     connectDragSource: connect.dragSource(),
     isDragging: monitor.isDragging()
@@ -64,14 +67,14 @@ function collectTarget(connect, monitor) {
 
 class ListItem extends Component {
   render() {
-    const { index, text, isDragging, connectDragSource, connectDropTarget } = this.props
+    const { muiTheme, index, text, highlight, isDragging, connectDragSource, connectDropTarget } = this.props
     const opacity = isDragging ? 0.5 : 1
     const backgroundColor = isDragging ? 'yellow' : 'white'
+    // console.log(muiTheme.paper.zDepthShadows)
+    const zDepthShadows = muiTheme.paper.zDepthShadows
     return connectDragSource(connectDropTarget(
-      <div className='lsDiv'>
-        <Paper style={{opacity, backgroundColor }}>
+      <div className='itemList' style={{backgroundColor}}>
           {(index + 1) + " " + text}
-        </Paper>
       </div>
     ))
   }
@@ -88,6 +91,7 @@ ListItem.propTypes = {
 }
 
 export default flow(
-  DragSource(ItemTypes.LISTITEM, cardSource, collectTarget),
-  DropTarget(ItemTypes.LISTITEM, cardTarget, collectSource)
+  DragSource(ItemTypes.LISTITEM, cardSourceSpec, collectSourceProps),
+  DropTarget(ItemTypes.LISTITEM, cardTargetSpec, collectTargetProps),
+  muiThemeable(),
 )(ListItem)

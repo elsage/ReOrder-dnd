@@ -46,22 +46,23 @@ class App extends Component {
 
   render() {
     const { cards } = this.state
-
+    let empty = this.state.isEmpty
+    console.log(empty)
     return (
-      this.state.isEmpty ? (
+      empty ? (
         <MultiThemeProvider>
           <PullDataButton saveCards={this.saveCards} />
         </MultiThemeProvider>
       ) : (
           <div className="lsDiv" style={style}>
             {cards.map((card, i) => (
-              <MultiThemeProvider>
+              
                 <ListItem key={card.id}
                   index={i}
                   id={card.id}
                   text={card.instruction}
                   moveCard={this.moveCard} />
-              </MultiThemeProvider>
+              
             ))}
             <MultiThemeProvider>
               <ListSubmissionButton />
