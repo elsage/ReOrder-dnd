@@ -10,14 +10,20 @@ class PullDataButton extends Component {
   constructor(props) {
     super(props)
     this.state = {
-      datasetName: ''
+      datasetName: '',
+      errorText: ''
     }
   }
 
   updateInput = (event) => {
-    this.setState({
-      datasetName: event.target.value
-    })
+    if (this.state.errorText === '') {
+      this.setState({ datasetName: event.target.value })
+    } else {
+      this.setState({
+        datasetName: event.target.value,
+        errorText: ''
+      })
+    }
   }
 
   retrieveDataset = (event) => {
@@ -29,7 +35,10 @@ class PullDataButton extends Component {
         console.log('Data retrieved successfully.')
       },
       error: (e) => {
-        alert(`${this.state.datasetName} not found. Please try again.`)
+        this.setState({
+          errorText: 'Dataset not found. Please try again.'
+        })
+        
       },
       dataType: 'json'
     })
@@ -43,8 +52,9 @@ class PullDataButton extends Component {
           <TextField type='text'
             id={'dataset-input-textfield'}
             value={this.state.datasetName}
-            placeholder={'Search'}
-            onChange={this.updateInput} /> <br />
+            onChange={this.updateInput} 
+            hintText='Enter Dataset Name Here'
+            errorText={this.state.errorText}/> <br />
           <RaisedButton primary={true} type='submit'> Submit </RaisedButton>
         </form>
       </Paper>

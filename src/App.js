@@ -46,10 +46,9 @@ class App extends Component {
 
   render() {
     const { cards } = this.state
-    let empty = this.state.isEmpty
-    console.log(empty)
+
     return (
-      empty ? (
+      this.state.isEmpty ? (
         <MultiThemeProvider>
           <PullDataButton saveCards={this.saveCards} />
         </MultiThemeProvider>
@@ -65,7 +64,7 @@ class App extends Component {
               </MultiThemeProvider>
             ))}
             <MultiThemeProvider>
-            <ListSubmissionButton />
+              <ListSubmissionButton />
             </MultiThemeProvider>
           </div>
         )

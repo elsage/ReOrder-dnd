@@ -29,6 +29,4 @@ ListSubmissionButton.propTypes = {
     listRO: PropTypes.array.isRequired
 }
 
-
-
 export default ListSubmissionButton;
