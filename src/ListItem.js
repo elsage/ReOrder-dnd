@@ -64,13 +64,18 @@ function collectSourceProps(connect, monitor) {
 }
 
 class ListItem extends Component {
+
+  inputRank = () => {
+    console.log("Here you'll be able to enter items ranks directly.")
+  }
+  
   render() {
     const { index, text, isDragging, connectDragSource, connectDropTarget } = this.props
     // const opacity = isDragging ? 1 : 0.50
     const backgroundColor = isDragging ? 'yellow' : 'white'
 
     return connectDragSource(connectDropTarget(
-      <div className='itemList' style={{ backgroundColor }}>
+      <div className='itemList' style={{ backgroundColor }} onDoubleClick={this.inputRank}>
         {(index + 1) + " " + text}
       </div>
     ))

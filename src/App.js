@@ -56,11 +56,13 @@ class App extends Component {
         </MultiThemeProvider>
       ) : (
           <div className="lsDiv">
-            <br/>
+            <br />
             <MultiThemeProvider>
-              <Paper style={{padding: '20px', backgroundColor: '#00BCD4'}}> Instructions: Drag and Drop list element to change their order. </Paper>
+              <Paper style={{ padding: '20px', backgroundColor: '#00BCD4' }}>
+                Instructions: Drag and drop list elements to change their order.
+              </Paper>
             </MultiThemeProvider>
-            <br/>
+            <br />
             {cards.map((card, i) => (
               <ListItem key={card.id}
                 index={i}
