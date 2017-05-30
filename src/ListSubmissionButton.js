@@ -61,7 +61,7 @@ class ListSubmissionButton extends Component {
 
 ListSubmissionButton.propTypes = {
   listRO: PropTypes.array.isRequired,
-  exitProgram: PropTypes.func.isRequired
+  exit: PropTypes.func.isRequired
 }
 
 export default ListSubmissionButton;
