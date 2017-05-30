@@ -83,7 +83,7 @@ ListItem.propTypes = {
   index: PropTypes.number.isRequired,
   isDragging: PropTypes.bool.isRequired,
   id: PropTypes.any.isRequired,
-  instruction: PropTypes.string.isRequired,
+  // instruction: PropTypes.string.isRequired,
   moveCard: PropTypes.func.isRequired
 }
 

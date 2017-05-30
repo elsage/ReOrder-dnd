@@ -10,9 +10,6 @@ import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
 
 injectTapEventPlugin()
-const style = {
-  // width: 400
-}
 
 class App extends Component {
   constructor(props) {
@@ -30,7 +27,7 @@ class App extends Component {
     })
   }
 
-  exit = () => {
+  reset = () => {
     this.setState({
       cards: [{}],
       isEmpty: true
@@ -53,26 +50,22 @@ class App extends Component {
 
   render() {
     const { cards } = this.state
-
     return (
-
       this.state.isEmpty ? (
         <MultiThemeProvider>
           <PullDataButton saveCards={this.saveCards} />
         </MultiThemeProvider>
       ) : (
-          <div className="lsDiv" style={style}>
+          <div className="lsDiv">
             {cards.map((card, i) => (
-
               <ListItem key={card.id}
                 index={i}
                 id={card.id}
                 text={card.instruction}
                 moveCard={this.moveCard} />
-
             ))}
             <MultiThemeProvider>
-              <ListSubmissionButton exit={this.exit} />
+              <ListSubmissionButton listRO={this.state.cards} exit={this.reset} />
             </MultiThemeProvider>
           </div>
         )
