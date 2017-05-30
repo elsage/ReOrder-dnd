@@ -11,8 +11,15 @@ class PullDataButton extends Component {
     super(props)
     this.state = {
       datasetName: '',
-      errorText: ''
+      errorText: '',
+      hintText: 'Name'
     }
+  }
+
+  updateHint = () => {
+    this.setState({
+      hintText: ''
+    })
   }
 
   updateInput = (event) => {
@@ -53,7 +60,11 @@ class PullDataButton extends Component {
             id={'dataset-input-textfield'}
             value={this.state.datasetName}
             onChange={this.updateInput} 
-            hintText='Enter Dataset Name Here'
+            inputStyle={{textAlign: 'center'}}
+            onFocus={this.updateHint}
+            hintText={this.state.hintText}
+            hintStyle={{width: '225px', textAlign: 'center'}}
+            style={{width: '225px'}}
             errorText={this.state.errorText}/> <br />
           <RaisedButton primary={true} type='submit'> Submit </RaisedButton>
         </form>

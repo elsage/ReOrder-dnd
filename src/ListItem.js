@@ -70,8 +70,8 @@ class ListItem extends Component {
     const backgroundColor = isDragging ? 'yellow' : 'white'
 
     return connectDragSource(connectDropTarget(
-      <div className='itemList' style={{backgroundColor}}>
-          {(index + 1) + " " + text}
+      <div className='itemList' style={{ backgroundColor }}>
+        {(index + 1) + " " + text}
       </div>
     ))
   }

@@ -37,7 +37,6 @@ class ListSubmissionButton extends Component {
   }
 
   render() {
-    console.log(this.props.listRO)
     const dialogActions = [
     <RaisedButton primary={true} label='Exit' onClick={this.exitProgram}/>,
     <RaisedButton secondary={true} label='More Changes' onClick={this.closeDialog}/>

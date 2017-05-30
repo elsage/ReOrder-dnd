@@ -8,9 +8,7 @@ import PullDataButton from './PullDataButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
 
-
 injectTapEventPlugin()
-
 class App extends Component {
   constructor(props) {
     super(props)
