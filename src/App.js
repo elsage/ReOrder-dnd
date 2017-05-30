@@ -7,6 +7,7 @@ import ListSubmissionButton from './ListSubmissionButton';
 import PullDataButton from './PullDataButton';
 import injectTapEventPlugin from 'react-tap-event-plugin';
 import MultiThemeProvider from 'material-ui/styles/MuiThemeProvider';
+import Paper from 'material-ui/Paper';
 
 injectTapEventPlugin()
 class App extends Component {
@@ -55,6 +56,11 @@ class App extends Component {
         </MultiThemeProvider>
       ) : (
           <div className="lsDiv">
+            <br/>
+            <MultiThemeProvider>
+              <Paper style={{padding: '20px', backgroundColor: '#00BCD4'}}> Instructions: Drag and Drop list element to change their order. </Paper>
+            </MultiThemeProvider>
+            <br/>
             {cards.map((card, i) => (
               <ListItem key={card.id}
                 index={i}
