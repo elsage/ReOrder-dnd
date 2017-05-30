@@ -19,7 +19,7 @@ class App extends Component {
     super(props)
     this.state = {
       cards: [{}],
-      isEmpty: true //Consider removing this (test cards instead).
+      isEmpty: true
     }
   }
 
@@ -27,6 +27,13 @@ class App extends Component {
     this.setState({
       cards: newCards,
       isEmpty: false
+    })
+  }
+
+  exit = () => {
+    this.setState({
+      cards: [{}],
+      isEmpty: true
     })
   }
 
@@ -46,26 +53,26 @@ class App extends Component {
 
   render() {
     const { cards } = this.state
-    let empty = this.state.isEmpty
-    console.log(empty)
+
     return (
-      empty ? (
+
+      this.state.isEmpty ? (
         <MultiThemeProvider>
           <PullDataButton saveCards={this.saveCards} />
         </MultiThemeProvider>
       ) : (
           <div className="lsDiv" style={style}>
             {cards.map((card, i) => (
-              <MultiThemeProvider>
-                <ListItem key={card.id}
-                  index={i}
-                  id={card.id}
-                  text={card.instruction}
-                  moveCard={this.moveCard} />
-              </MultiThemeProvider>
+
+              <ListItem key={card.id}
+                index={i}
+                id={card.id}
+                text={card.instruction}
+                moveCard={this.moveCard} />
+
             ))}
             <MultiThemeProvider>
-            <ListSubmissionButton />
+              <ListSubmissionButton exit={this.exit} />
             </MultiThemeProvider>
           </div>
         )
