@@ -4,8 +4,6 @@ import { findDOMNode } from 'react-dom';
 import { DragSource, DropTarget } from 'react-dnd';
 import ItemTypes from './ItemTypes';
 import flow from 'lodash/flow';
-import Paper from 'material-ui/Paper';
-import muiThemeable from 'material-ui/styles/muiThemeable';
 
 const cardSourceSpec = {
   beginDrag(props) {
@@ -67,11 +65,10 @@ function collectSourceProps(connect, monitor) {
 
 class ListItem extends Component {
   render() {
-    const { muiTheme, index, text, highlight, isDragging, connectDragSource, connectDropTarget } = this.props
-    const opacity = isDragging ? 0.5 : 1
+    const { index, text, isDragging, connectDragSource, connectDropTarget } = this.props
+    // const opacity = isDragging ? 1 : 0.50
     const backgroundColor = isDragging ? 'yellow' : 'white'
-    // console.log(muiTheme.paper.zDepthShadows)
-    const zDepthShadows = muiTheme.paper.zDepthShadows
+
     return connectDragSource(connectDropTarget(
       <div className='itemList' style={{backgroundColor}}>
           {(index + 1) + " " + text}
@@ -92,6 +89,5 @@ ListItem.propTypes = {
 
 export default flow(
   DragSource(ItemTypes.LISTITEM, cardSourceSpec, collectSourceProps),
-  DropTarget(ItemTypes.LISTITEM, cardTargetSpec, collectTargetProps),
-  muiThemeable(),
+  DropTarget(ItemTypes.LISTITEM, cardTargetSpec, collectTargetProps)
 )(ListItem)
