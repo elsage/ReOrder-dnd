@@ -17,14 +17,17 @@ class App extends Component {
     this.state = {
       cards: [{}],
       isEmpty: true,
-      displayInsert: false
+      displayInsert: false,
+      startIndex: 0
     }
   }
 
-  rankDirectly = () => {
-    this.setState({
-      displayInsert: !this.displayInsert
-    })
+  //Card Index Only Matters when the insert is visible.
+  rankDirectly = (cardIndex) => {
+    this.setState(update(this.state, {
+      displayInsert: { $set: !this.state.displayInsert },
+      startIndex: {$set: cardIndex }
+    }))
   }
 
   saveCards = (newCards) => {
@@ -43,6 +46,7 @@ class App extends Component {
 
   // Repurpose to also be able to handle double clicks.
   moveCard = (dragIndex, hoverIndex) => {
+    console.log(`dragIndex: ${dragIndex} \n hoverIndex: ${hoverIndex}`)
     const { cards } = this.state
     const dragCard = cards[dragIndex]
 
@@ -70,7 +74,14 @@ class App extends Component {
               <Paper style={{ padding: '20px', backgroundColor: '#00BCD4' }}>
                 Instructions: Drag and drop list elements to change their order.
               </Paper>
-              <InsertDialog visible={this.state.InsertDialog} toggleVisible={this.rankDirectly} cardCount={this.state.cards.length} />
+            </MultiThemeProvider>
+            <MultiThemeProvider>
+              <InsertDialog 
+                visible={this.state.displayInsert} 
+                toggleVisible={this.rankDirectly} 
+                cardCount={this.state.cards.length} 
+                startIndex={this.state.startIndex}
+                moveCard={this.moveCard}/>
             </MultiThemeProvider>
             <br />
             {cards.map((card, i) => (
