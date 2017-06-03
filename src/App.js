@@ -2,6 +2,7 @@ import React, { Component } from 'react';
 import update from 'react/lib/update';
 import { DragDropContext } from 'react-dnd';
 import HTML5Backend from 'react-dnd-html5-backend';
+import InsertDialog from './InsertDialog';
 import ListItem from './ListItem';
 import ListSubmissionButton from './ListSubmissionButton';
 import PullDataButton from './PullDataButton';
@@ -15,8 +16,15 @@ class App extends Component {
     super(props)
     this.state = {
       cards: [{}],
-      isEmpty: true
+      isEmpty: true,
+      displayInsert: false
     }
+  }
+
+  rankDirectly = () => {
+    this.setState({
+      displayInsert: !this.displayInsert
+    })
   }
 
   saveCards = (newCards) => {
@@ -33,6 +41,7 @@ class App extends Component {
     })
   }
 
+  // Repurpose to also be able to handle double clicks.
   moveCard = (dragIndex, hoverIndex) => {
     const { cards } = this.state
     const dragCard = cards[dragIndex]
@@ -42,7 +51,7 @@ class App extends Component {
         $splice: [
           [dragIndex, 1],
           [hoverIndex, 0, dragCard]
-        ],
+        ]
       }
     }))
   }
@@ -61,6 +70,7 @@ class App extends Component {
               <Paper style={{ padding: '20px', backgroundColor: '#00BCD4' }}>
                 Instructions: Drag and drop list elements to change their order.
               </Paper>
+              <InsertDialog visible={this.state.InsertDialog} toggleVisible={this.rankDirectly} cardCount={this.state.cards.length} />
             </MultiThemeProvider>
             <br />
             {cards.map((card, i) => (
@@ -68,7 +78,8 @@ class App extends Component {
                 index={i}
                 id={card.id}
                 text={card.instruction}
-                moveCard={this.moveCard} />
+                moveCard={this.moveCard}
+                rankDirectly={this.rankDirectly} />
             ))}
             <MultiThemeProvider>
               <ListSubmissionButton listRO={this.state.cards} exit={this.reset} />

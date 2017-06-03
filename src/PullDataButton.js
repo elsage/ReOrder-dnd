@@ -40,6 +40,7 @@ class PullDataButton extends Component {
       success: (data) => {
         this.props.saveCards(data)
         console.log('Data retrieved successfully.')
+        console.log(data)
       },
       error: (e) => {
         this.setState({
