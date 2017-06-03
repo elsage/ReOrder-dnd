@@ -34,7 +34,6 @@ class InsertDialog extends Component {
         label='Submit' 
         onClick={()=> { 
           moveCard(startIndex, this.state.selectedValue)
-          toggleVisible() 
         }} />
     ]
 
