@@ -6,7 +6,7 @@ import RaisedButton from 'material-ui/RaisedButton';
 
 class InsertDialog extends Component {
   state = {
-    selectedValue: 0
+    selectedValue: null
   }
 
   handleChange = (event, index, value) => {
@@ -24,8 +24,10 @@ class InsertDialog extends Component {
 
     const dialogActions = [
       <SelectField
+        hintText='Enter New Rank'
         value={this.state.selectedValue}
         onChange={this.handleChange}
+        style={{width: '150px', verticalAlign: 'bottom'}}
         maxHeight={300}>
         {fieldItems}
       </SelectField>,
