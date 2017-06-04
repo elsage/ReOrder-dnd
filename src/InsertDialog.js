@@ -24,11 +24,9 @@ class InsertDialog extends Component {
 
     const dialogActions = [
       <SelectField
-        floatingLabelText='New Rank'
-        floatingLabelFixed={true}
         value={this.state.selectedValue}
         onChange={this.handleChange}
-        style={{width: '150px'}}
+        style={{width: '150px', verticalAlign: 'bottom'}}
         maxHeight={300}>
         {fieldItems}
       </SelectField>,
