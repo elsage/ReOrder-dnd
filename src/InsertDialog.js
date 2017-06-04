@@ -16,7 +16,7 @@ class InsertDialog extends Component {
   }
 
   render() {
-    const { visible, startIndex, cardCount, toggleVisible, moveCard } = this.props
+    const { visible, cardText, startIndex, cardCount, toggleVisible, insertCard } = this.props
     const fieldItems = []
     for(var i = 0; i < cardCount; i++) {
       fieldItems.push(<MenuItem value={i} key={i} primaryText={`Rank ${i+1}`}/>)
@@ -33,7 +33,7 @@ class InsertDialog extends Component {
         primary={true} 
         label='Submit' 
         onClick={()=> { 
-          moveCard(startIndex, this.state.selectedValue)
+          insertCard(startIndex, this.state.selectedValue)
         }} />
     ]
 
@@ -45,7 +45,7 @@ class InsertDialog extends Component {
           modal={false}
           open={visible}
           onRequestClose={toggleVisible}>
-          Please select the rank you wish the item to occupy.
+          {cardText}
         </Dialog>
       ) : (
         <div/>

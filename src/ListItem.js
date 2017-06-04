@@ -71,7 +71,7 @@ class ListItem extends Component {
     const backgroundColor = isDragging ? 'yellow' : 'white'
 
     return connectDragSource(connectDropTarget(
-      <div className='itemList' style={{ backgroundColor }} onDoubleClick={()=>rankDirectly(index)}>
+      <div className='itemList' style={{ backgroundColor }} onDoubleClick={()=>rankDirectly(index, text)}>
         {(index + 1) + " " + text}
       </div>
     ))

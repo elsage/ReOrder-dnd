@@ -18,15 +18,17 @@ class App extends Component {
       cards: [{}],
       isEmpty: true,
       displayInsert: false,
-      startIndex: 0
+      startIndex: 0,
+      cardText: ''
     }
   }
 
   //Card Index Only Matters when the insert is visible.
-  rankDirectly = (cardIndex) => {
+  rankDirectly = (cardIndex, cardText) => {
     this.setState(update(this.state, {
       displayInsert: { $set: !this.state.displayInsert },
-      startIndex: {$set: cardIndex }
+      startIndex: {$set: cardIndex },
+      cardText: {$set: cardText}
     }))
   }
 
@@ -44,12 +46,26 @@ class App extends Component {
     })
   }
 
-  // Repurpose to also be able to handle double clicks.
-  moveCard = (dragIndex, hoverIndex) => {
-    console.log(`dragIndex: ${dragIndex} \n hoverIndex: ${hoverIndex}`)
+  insertCard = (dragIndex, hoverIndex) => {
     const { cards } = this.state
     const dragCard = cards[dragIndex]
+    
+    this.setState(update(this.state, {
+      cards: {
+        $splice: [
+          [dragIndex, 1],
+          [hoverIndex, 0, dragCard]
+        ]
+      },
+      displayInsert: { $set: !this.state.displayInsert }
+    }))
+  }
 
+  // Repurpose to also be able to handle double clicks.
+  moveCard = (dragIndex, hoverIndex) => {
+    const { cards } = this.state
+    const dragCard = cards[dragIndex]
+    
     this.setState(update(this.state, {
       cards: {
         $splice: [
@@ -81,7 +97,8 @@ class App extends Component {
                 toggleVisible={this.rankDirectly} 
                 cardCount={this.state.cards.length} 
                 startIndex={this.state.startIndex}
-                moveCard={this.moveCard}/>
+                insertCard={this.insertCard}
+                cardText={this.state.cardText}/>
             </MultiThemeProvider>
             <br />
             {cards.map((card, i) => (
