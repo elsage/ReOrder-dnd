@@ -21,7 +21,8 @@ class InsertDialog extends Component {
     for(var i = 0; i < cardCount; i++) {
       fieldItems.push(<MenuItem value={i} key={i} primaryText={`Rank ${i+1}`}/>)
     }
-
+     
+    // Change so that initial value is the startIndex value.
     const dialogActions = [
       <SelectField
         hintText='Enter New Rank'
@@ -36,6 +37,7 @@ class InsertDialog extends Component {
         label='Submit' 
         onClick={()=> { 
           insertCard(startIndex, this.state.selectedValue)
+          this.setState({selectedValue: null})
         }} />
     ]
 
@@ -46,7 +48,9 @@ class InsertDialog extends Component {
           actions={dialogActions}
           modal={false}
           open={visible}
-          onRequestClose={toggleVisible}>
+          onRequestClose={() => {
+            this.setState({selectedValue: null})
+            toggleVisible()}}>
           {cardText}
         </Dialog>
       ) : (
